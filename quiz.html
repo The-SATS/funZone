@@ -29,7 +29,7 @@
                     <div class="flex">
 
                         <div class="answercont">
-                            <div class="answerslot title1slot">
+                            <div class="answerslot movie1answer1slot">
 
                             </div>
                         </div>
@@ -198,11 +198,11 @@
 <h4 class="title3"></h4>
 <h4 class="runtime1"></h4>
 <h4 class="director2"></h4>
-<h4 class="year2"></h4>
+<h4 class="year3"></h4>
 <h4 class="director1"></h4>
 <h4 class="year1"></h4>
 <h4 class="director3"></h4>
-<h4 class="runtime2"></h4>
+<h4 class="runtime3"></h4>
 <h4 class="title1"></h4>
 </div>
 </div>
@@ -222,7 +222,7 @@
 
     <script>
 
-        
+            const myApp = {};
 
             $("h4").draggable({
                 snap: ".answercont",
@@ -231,7 +231,7 @@
                 revert: "invalid"
             });
             $(".answerslot").droppable({
-                accept: "h4",
+                accept: "",
                 drop: function (event, ui) {
                     $(this)
                         .addClass("correct")
@@ -239,7 +239,7 @@
             });
 
 
-            $(".title1slot").droppable({
+           $(".movie1answer1slot").droppable({
                 accept: ".title1",
             });
 
@@ -287,8 +287,6 @@
                 accept: ".runtime3",
             });
 
-
-    const myApp = {};
 
     //function call to make typing happen will have to place into window init function
     sort('letter1', 100);
@@ -379,7 +377,7 @@
     }
 
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
         movieCall();
 
         //function for calling api to get movie info from random 7 digit string
@@ -415,7 +413,7 @@
 
 
         const ifPosterExist = function (data) {
-            if (data.Poster == "N/A" || data.Type !== "movie" || data.Title == "N/A" || data.Director == "N/A" || data.Year == "N/A") {
+            if (data.Poster == "N/A" || data.Type !== "movie" || data.Language !== "English" || data.Title == "N/A" || data.Director == "N/A" || data.Year == "N/A") {
                 movieCall();
             } else {
 
@@ -423,16 +421,16 @@
                 $(`.poster${i}`).attr('src', `${data.Poster}`);
 
                 //add title
-                $(`.title${i}`).append(`<h4 class="director${i}">${data.Director}</h4>`);
+                $(`.title${i}`).append(`<h4 class="title${i}">${data.Title}</h4>`);
 
                 //add director
-                $(`.director${i}`).append(`<h4 class="runtime${i}">${data.Runtime}</h4>`);
+                $(`.director${i}`).append(`<h4 class="director${i}">${data.Director}</h4>`);
 
                 //add year
-                $(`.year${i}`).append(`<h4 class="title${i}">${data.Title}</h4>`);
+                $(`.year${i}`).append(`<h4 class="year${i}">${data.Year}</h4>`);
 
                 //add runtime
-                $(`.runtime${i}`).append(`<h4 class="year${i}">${data.Year}</h4>`);
+                $(`.runtime${i}`).append(`<h4 class="runtime${i}">${data.Runtime}</h4>`);
 
 
             };
